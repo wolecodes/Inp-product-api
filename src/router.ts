@@ -10,3 +10,5 @@ router.get("/product/:id", () => {});
 router.post("/product", () => {});
 router.put("/product/:id", () => {});
 router.delete("/product/:id", () => {});
+
+export default router;

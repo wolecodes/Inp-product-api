@@ -43,23 +43,30 @@ export const createProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
-  const updated = await prisma.product.update({
-    where: {
-      id: req.params.id,
-    },
-    data: {
-      name: req.body.name,
-    },
-  });
-  res.json({ data: updated });
+  try {
+    const updated = await prisma.product.update({
+      where: {
+        id: req.params.id,
+      },
+      data: {
+        name: req.body.name,
+      },
+    });
+    res.json({ data: updated });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating product" });
+  }
 };
 
 export const deleteProduct = async (req, res) => {
-  const deleted = await prisma.product.delete({
-    where: {
-      id: req.params.id,
-    },
-  });
-
-  res.json({ data: deleted });
+  try {
+    const deleted = await prisma.product.delete({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.json({ data: deleted });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting product" });
+  }
 };

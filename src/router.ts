@@ -1,13 +1,19 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import { handleInputError } from "./modules/middleware";
-import { createProduct, getProducts, updateProduct } from "./handlers/product";
+import {
+  createProduct,
+  deleteProduct,
+  getProduct,
+  getProducts,
+  updateProduct,
+} from "./handlers/product";
 const router = Router();
 
 //Create product route
 
 router.get("/product", getProducts);
-router.get("/product/:id", () => {});
+router.get("/product/:id", getProduct);
 
 router.put(
   "/product/:id",
@@ -21,6 +27,6 @@ router.post(
   handleInputError,
   createProduct
 );
-router.delete("/product/:id", () => {});
+router.delete("/product/:id", deleteProduct);
 
 export default router;

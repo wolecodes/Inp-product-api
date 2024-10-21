@@ -29,12 +29,17 @@ export const getProduct = async (req, res) => {
     res.status(500).json({ message: "Error getting product" });
   }
 };
-xport const createProduct = async (req, res) => {
-  const product = await prisma.product.create({
-    data: { name: req.body.name },
-  });
+export const createProduct = async (req, res) => {
+  try {
+    const product = await prisma.product.create({
+      data: { name: req.body.name },
+    });
 
-  res.json({ data: product });
+    res.json({ data: product });
+  } catch (error) {
+    console.error("Error creating product", error);
+    res.status(500).json({ message: "Error creating product" });
+  }
 };
 
 export const updateProduct = async (req, res) => {

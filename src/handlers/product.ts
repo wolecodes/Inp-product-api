@@ -29,8 +29,7 @@ export const getProduct = async (req, res) => {
     res.status(500).json({ message: "Error getting product" });
   }
 };
-
-export const createProduct = async (req, res) => {
+xport const createProduct = async (req, res) => {
   const product = await prisma.product.create({
     data: { name: req.body.name },
   });

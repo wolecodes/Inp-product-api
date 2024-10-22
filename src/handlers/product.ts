@@ -1,4 +1,3 @@
-import { runInNewContext } from "vm";
 import prisma from "../db";
 
 export const getProducts = async (req, res) => {
@@ -15,16 +14,18 @@ export const getProducts = async (req, res) => {
 };
 
 export const getProduct = async (req, res) => {
-  const id = req.params.id;
   try {
     const product = await prisma.product.findUnique({
-      where: id,
+      where: {
+        id: req.params.id,
+      },
     });
     if (product === null) {
       res.status(404).json({ message: "Product not found" });
       return;
     }
-  } catch (error: any) {
+    res.json({ data: product });
+  } catch (error) {
     console.error("Error getting product", error);
     res.status(500).json({ message: "Error getting product" });
   }

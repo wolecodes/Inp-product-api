@@ -1,12 +1,16 @@
 import prisma from "../db";
 
+// Function to parse fields (query params)
+
 function parseFields(fields: string) {
   return fields
     .split(",")
     .reduce((acc, field) => ({ ...acc, [field]: true }), {});
 }
-/*
- * get
+/**
+ * Route handler to get all products
+ * @param {object} req - request object
+ * @param {object} res - response object
  */
 
 export const getProducts = async (req, res) => {
@@ -22,6 +26,11 @@ export const getProducts = async (req, res) => {
   }
 };
 
+/**
+ *  handles to get a single products
+ * @param {object} req - request object
+ * @param {object} res - response object
+ */
 export const getProduct = async (req, res) => {
   try {
     const { fields } = req.query;
@@ -41,6 +50,13 @@ export const getProduct = async (req, res) => {
     res.status(500).json({ message: "Error getting product" });
   }
 };
+
+/**
+ *  handles  create product
+ * @param {object} req - request object
+ * @param {object} res - response object
+ */
+
 export const createProduct = async (req, res) => {
   try {
     const product = await prisma.product.create({
@@ -53,6 +69,12 @@ export const createProduct = async (req, res) => {
     res.status(500).json({ message: "Error creating product" });
   }
 };
+
+/**
+ *   update product
+ * @param {object} req - request object
+ * @param {object} res - response object
+ */
 
 export const updateProduct = async (req, res) => {
   try {
@@ -72,6 +94,11 @@ export const updateProduct = async (req, res) => {
   }
 };
 
+/**
+ *  handles to delete a single product
+ * @param {object} req - request object
+ * @param {object} res - response object
+ */
 export const deleteProduct = async (req, res) => {
   try {
     const { fields } = req.query;

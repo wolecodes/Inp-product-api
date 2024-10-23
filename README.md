@@ -16,7 +16,7 @@ A simple product management system API that allow users to add, retrieve, update
 
 - Create  a product -> `/product`
 - Retrive all products or product by id ->`/product` | `/product/:id`
-- Update and delete prouduct by id ->`/product/:id` |`/product/id`
+- Update and delete prouduct by id ->`/product/:id` |`/product/:id`
 
 ## Prerequisites
 

@@ -1,5 +1,14 @@
 import prisma from "../db";
 
+function parseFields(fields: string) {
+  return fields
+    .split(",")
+    .reduce((acc, field) => ({ ...acc, [field]: true }), {});
+}
+/*
+ * get
+ */
+
 export const getProducts = async (req, res) => {
   try {
     const products = await prisma.product.findMany({});
@@ -15,10 +24,12 @@ export const getProducts = async (req, res) => {
 
 export const getProduct = async (req, res) => {
   try {
+    const { fields } = req.query;
     const product = await prisma.product.findUnique({
       where: {
         id: req.params.id,
       },
+      select: fields ? parseFields(fields as string) : undefined,
     });
     if (product === null) {
       res.status(404).json({ message: "Product not found" });
@@ -45,6 +56,7 @@ export const createProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
+    const { fields } = req.query;
     const updated = await prisma.product.update({
       where: {
         id: req.params.id,
@@ -52,6 +64,7 @@ export const updateProduct = async (req, res) => {
       data: {
         name: req.body.name,
       },
+      select: fields ? parseFields(fields as string) : undefined,
     });
     res.json({ data: updated });
   } catch (error) {
@@ -61,10 +74,12 @@ export const updateProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
   try {
+    const { fields } = req.query;
     const deleted = await prisma.product.delete({
       where: {
         id: req.params.id,
       },
+      select: fields ? parseFields(fields as string) : undefined,
     });
     res.json({ data: deleted });
   } catch (error) {

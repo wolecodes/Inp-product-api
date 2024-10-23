@@ -1,3 +1,16 @@
+# Dependency directories
 **/node_modules
 # Keep environment variables out of version control
 .env
+
+# Transpiled output
+dist/
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Production build files
+build/
+
+

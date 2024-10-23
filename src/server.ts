@@ -5,12 +5,12 @@ import morgan from "morgan";
 const app = express();
 
 app.use(morgan("dev"));
-//ensure that a json body is parsed
+
+// Parses incoming requests with JSON payloads.
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-
+// Home URL is introductory URL
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

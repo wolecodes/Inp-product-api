@@ -1,6 +1,6 @@
 import prisma from "../db";
 
-// Function to parse fields (query params)
+// Function to parse fields (query pa
 
 function parseFields(fields: string) {
   return fields
@@ -79,6 +79,7 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const { fields } = req.query;
+    // @ts-ignore
     const updated = await prisma.product.update({
       where: {
         id: req.params.id,
